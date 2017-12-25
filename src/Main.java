@@ -52,6 +52,7 @@ public class Main extends Thread{
         glfwSetCursorPosCallback(window,mouse= new MouseHandler());
         glfwSetMouseButtonCallback(window,mouseButton= new MouseButton());
         Camera.factor((float)widthWindow/heightWindow);
+        Camera.pos.set(0,-1,-3);
         glfwSetFramebufferSizeCallback(window, new GLFWFramebufferSizeCallback() {
             @Override
             public void invoke(long window, int width, int height) {
@@ -144,12 +145,13 @@ public class Main extends Thread{
         }
 
 
+        /*
         Camera.pos.x= -Camera.center.x+(float)(distanse * Math.sin(Math.toRadians(Camera.angle.y))*Math.cos(Math.toRadians(Camera.angle.x)));
         Camera.pos.z= -Camera.center.z+(float)(distanse * Math.cos(Math.toRadians(Camera.angle.y))*Math.cos(Math.toRadians(Camera.angle.x)));
         Camera.pos.y= -Camera.center.y-(float)(distanse * Math.sin(Math.toRadians(Camera.angle.x)));
+        */
 
 
-        /*
         if(KeyboardHandler.isKeyDown(GLFW_KEY_W)) {
             Camera.pos.z += 0.1 * Math.cos(Math.toRadians(Camera.angle.y));
             Camera.pos.x += 0.1 * Math.sin(Math.toRadians(Camera.angle.y));
@@ -168,7 +170,7 @@ public class Main extends Thread{
             Camera.pos.z += 0.1 * Math.sin(Math.toRadians(Camera.angle.y));
             Camera.pos.x -= 0.1 * Math.cos(Math.toRadians(Camera.angle.y));
         }
-        */
+
     }
 
     public static void main(String... arg){
