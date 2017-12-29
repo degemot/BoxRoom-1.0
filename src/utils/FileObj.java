@@ -6,6 +6,16 @@ import java.io.IOException;
 
 public class FileObj {
 
+    private static String synthesizerS= "res/object/synthesizer.obj";
+    public static FileObj modelSynthesizer= new FileObj(synthesizerS);
+    private static String charS= "res/object/char.obj";
+    public static FileObj modelChar= new FileObj(charS);
+    private static String tableS= "res/object/table.obj";
+    public static FileObj modelTable= new FileObj(tableS);
+    private static String toiletS= "res/object/toilet.obj";
+    public static FileObj modelToilet= new FileObj(toiletS);
+
+
     private static String shereS= "res/object/sphere.obj";
     public static FileObj modelSphere= new FileObj(shereS);
     private static String boxS= "res/object/box.obj";

@@ -19,7 +19,7 @@ public class Planet extends FigureObject{
     public Particular trace;
 
     public Planet(FileObj model, ShaderProgram program, String texture, String name, float dis,float size,float angle,float round) {
-        super(model,program,texture);
+        super(model,program,texture,true);
         this.distanse = new Vec3(dis, 0f, 0f);
         this.color = new Vec3((float) Math.random(), (float) Math.random(), (float) Math.random());
         this.speedAngle = new Vec3(0.0f, angle, 0f);
@@ -32,7 +32,7 @@ public class Planet extends FigureObject{
         planet= true;
         ObjectQueue.Queue.add(this);
 
-        atmosphere= new Atmosphere(modelSphere,shaderAtmosphere,"none");
+        atmosphere= new Atmosphere(this,modelSphere,shaderAtmosphere,"none");
         atmosphere.size= size+0.2f;
         atmosphere.color= color;
 

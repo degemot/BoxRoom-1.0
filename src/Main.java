@@ -25,6 +25,7 @@ public class Main extends Thread{
     private MouseButton mouseButton;
     private Scene scene;
     long window;
+    FirstShape focused,picked;
 
 
     public Main(){
@@ -76,7 +77,7 @@ public class Main extends Thread{
                 currentTime += 20;
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-                FirstShape focused=ObjectQueue.Queue.focusedObject();
+                focused=ObjectQueue.QueueTrans.focusedObject();
                 if(focused!=null) {
                     System.out.println(focused.name);
                     focused.picked= true;
@@ -101,7 +102,6 @@ public class Main extends Thread{
                 }
                 Camera.update();
 
-
                 update();
                 glfwSwapBuffers(window);
             }
@@ -116,7 +116,6 @@ public class Main extends Thread{
     float cameraAngleX=0,cameraAngleY=0;
     float distanse=-10;
     public void update(){
-
         FigureObject.mouseVec.set(2*(float)mouse.x/widthWindow-1,1-2*(float)mouse.y/heightWindow,-1f);
         FigureObject.mouseVec= Camera.cameraProjection.invertR().multiplyR(FigureObject.mouseVec,1);
         FigureObject.mouseVec= Camera.cameraView.invertR().multiplyR(FigureObject.mouseVec,1);
@@ -127,48 +126,47 @@ public class Main extends Thread{
                 mouseY= mouse.y;
                 cameraAngleX= Camera.angle.x;
                 cameraAngleY= Camera.angle.y;
+                picked= focused;
             }
             Camera.angle.y= cameraAngleY+(float)((mouseX - mouse.x));
             Camera.angle.x= cameraAngleX+(float)((mouseY - mouse.y));
         }
         lostStateMouse= mouseButton.left;
 
-        if(KeyboardHandler.isKeyDown(GLFW_KEY_W)) {
-            distanse+=0.1;
-        }
-        if(KeyboardHandler.isKeyDown(GLFW_KEY_S)) {
-            distanse-=0.1;
-        }
 
-        if(KeyboardHandler.isKeyDown(GLFW_KEY_SPACE)){
-            scene.action();
+        if(picked!=null){
+            if (KeyboardHandler.isKeyDown(GLFW_KEY_W)) {
+                picked.pos.z+=0.2;
+            }
+            if (KeyboardHandler.isKeyDown(GLFW_KEY_S)) {
+                picked.pos.z-=0.2;
+            }
+            if (KeyboardHandler.isKeyDown(GLFW_KEY_A)) {
+                picked.pos.x-=0.2;
+            }
+            if (KeyboardHandler.isKeyDown(GLFW_KEY_D)) {
+                picked.pos.x+=0.2;
+            }
         }
-
-
-        /*
-        Camera.pos.x= -Camera.center.x+(float)(distanse * Math.sin(Math.toRadians(Camera.angle.y))*Math.cos(Math.toRadians(Camera.angle.x)));
-        Camera.pos.z= -Camera.center.z+(float)(distanse * Math.cos(Math.toRadians(Camera.angle.y))*Math.cos(Math.toRadians(Camera.angle.x)));
-        Camera.pos.y= -Camera.center.y-(float)(distanse * Math.sin(Math.toRadians(Camera.angle.x)));
-        */
-
-
-        if(KeyboardHandler.isKeyDown(GLFW_KEY_W)) {
-            Camera.pos.z += 0.1 * Math.cos(Math.toRadians(Camera.angle.y));
-            Camera.pos.x += 0.1 * Math.sin(Math.toRadians(Camera.angle.y));
-            Camera.pos.y -= 0.1 * Math.sin(Math.toRadians(Camera.angle.x));
-        }
-        if(KeyboardHandler.isKeyDown(GLFW_KEY_S)) {
-            Camera.pos.z -= 0.1 * Math.cos(Math.toRadians(Camera.angle.y));
-            Camera.pos.x -= 0.1 * Math.sin(Math.toRadians(Camera.angle.y));
-            Camera.pos.y += 0.1 * Math.sin(Math.toRadians(Camera.angle.x));
-        }
-        if(KeyboardHandler.isKeyDown(GLFW_KEY_A)) {
-            Camera.pos.z -= 0.1 * Math.sin(Math.toRadians(Camera.angle.y));
-            Camera.pos.x += 0.1 * Math.cos(Math.toRadians(Camera.angle.y));
-        }
-        if (KeyboardHandler.isKeyDown(GLFW_KEY_D)) {
-            Camera.pos.z += 0.1 * Math.sin(Math.toRadians(Camera.angle.y));
-            Camera.pos.x -= 0.1 * Math.cos(Math.toRadians(Camera.angle.y));
+        else {
+            if (KeyboardHandler.isKeyDown(GLFW_KEY_W)) {
+                Camera.pos.z += 0.1 * Math.cos(Math.toRadians(Camera.angle.y));
+                Camera.pos.x += 0.1 * Math.sin(Math.toRadians(Camera.angle.y));
+                Camera.pos.y -= 0.1 * Math.sin(Math.toRadians(Camera.angle.x));
+            }
+            if (KeyboardHandler.isKeyDown(GLFW_KEY_S)) {
+                Camera.pos.z -= 0.1 * Math.cos(Math.toRadians(Camera.angle.y));
+                Camera.pos.x -= 0.1 * Math.sin(Math.toRadians(Camera.angle.y));
+                Camera.pos.y += 0.1 * Math.sin(Math.toRadians(Camera.angle.x));
+            }
+            if (KeyboardHandler.isKeyDown(GLFW_KEY_A)) {
+                Camera.pos.z -= 0.1 * Math.sin(Math.toRadians(Camera.angle.y));
+                Camera.pos.x += 0.1 * Math.cos(Math.toRadians(Camera.angle.y));
+            }
+            if (KeyboardHandler.isKeyDown(GLFW_KEY_D)) {
+                Camera.pos.z += 0.1 * Math.sin(Math.toRadians(Camera.angle.y));
+                Camera.pos.x -= 0.1 * Math.cos(Math.toRadians(Camera.angle.y));
+            }
         }
 
     }
