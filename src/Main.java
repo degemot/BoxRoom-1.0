@@ -147,6 +147,19 @@ public class Main extends Thread{
             if (KeyboardHandler.isKeyDown(GLFW_KEY_D)) {
                 picked.pos.x+=0.2;
             }
+
+            if (KeyboardHandler.isKeyDown(GLFW_KEY_Q)) {
+                picked.pos.y+=0.2;
+            }
+            if (KeyboardHandler.isKeyDown(GLFW_KEY_E)) {
+                picked.pos.y-=0.2;
+            }
+            if (KeyboardHandler.isKeyDown(GLFW_KEY_Z)) {
+                picked.angle.y-=2;
+            }
+            if (KeyboardHandler.isKeyDown(GLFW_KEY_X)) {
+                picked.angle.y+=2;
+            }
         }
         else {
             if (KeyboardHandler.isKeyDown(GLFW_KEY_W)) {

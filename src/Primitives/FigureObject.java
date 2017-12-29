@@ -27,6 +27,7 @@ public class FigureObject extends FirstShape {
             atmosphere.size = size + 0.2f;
             atmosphere.color = color;
             atmosphere.pos= pos;
+            atmosphere.angle= angle;
         }
     }
 }
