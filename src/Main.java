@@ -163,13 +163,13 @@ public class Main extends Thread{
         }
         else {
             if (KeyboardHandler.isKeyDown(GLFW_KEY_W)) {
-                Camera.pos.z += 0.1 * Math.cos(Math.toRadians(Camera.angle.y));
-                Camera.pos.x += 0.1 * Math.sin(Math.toRadians(Camera.angle.y));
+                Camera.pos.z += 0.1 * Math.cos(Math.toRadians(Camera.angle.y))* Math.cos(Math.toRadians(Camera.angle.x));
+                Camera.pos.x += 0.1 * Math.sin(Math.toRadians(Camera.angle.y))* Math.cos(Math.toRadians(Camera.angle.x));
                 Camera.pos.y -= 0.1 * Math.sin(Math.toRadians(Camera.angle.x));
             }
             if (KeyboardHandler.isKeyDown(GLFW_KEY_S)) {
-                Camera.pos.z -= 0.1 * Math.cos(Math.toRadians(Camera.angle.y));
-                Camera.pos.x -= 0.1 * Math.sin(Math.toRadians(Camera.angle.y));
+                Camera.pos.z -= 0.1 * Math.cos(Math.toRadians(Camera.angle.y))* Math.cos(Math.toRadians(Camera.angle.x));
+                Camera.pos.x -= 0.1 * Math.sin(Math.toRadians(Camera.angle.y))* Math.cos(Math.toRadians(Camera.angle.x));
                 Camera.pos.y += 0.1 * Math.sin(Math.toRadians(Camera.angle.x));
             }
             if (KeyboardHandler.isKeyDown(GLFW_KEY_A)) {

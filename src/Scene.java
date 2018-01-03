@@ -30,7 +30,7 @@ public class Scene {
     }
 
     public void addObject(FileObj modelCar, ShaderProgram shaderBlock){
-        FigureObject obj= new FigureObject(modelCar,shaderBlock,"none",true);
+        FigureObject obj= new FigureObject(modelCar,shaderBlock,"time.png",true);
         obj.color.set(0f,1f,1f);
         obj.size= 0.5f;
         obj.pos.set((float)Math.random()*2,0.5f,(float)Math.random()*2);
